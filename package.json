@@ -5,6 +5,8 @@
     "express": "^5.1.0",
     "firebase-admin": "^13.5.0",
     "mongodb": "^6.20.0",
-    "mongoose": "^8.19.2"
+    "mongoose": "^8.19.2",
+    "razorpay": "^2.9.6",
+    "shortid": "^2.2.17"
   }
 }

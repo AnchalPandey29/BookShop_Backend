@@ -1,62 +1,36 @@
-const mongoose =require('mongoose');
+const mongoose = require("mongoose");
 
-const bookSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required: true,
-    },
-    author:{
-        type:String,
-         required: true,
-    },
-    publishDate:{
-        type:Date,
+const bookSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    author: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: { type: String },
+    category: { type: String },
+    imageUrl: { type: String },
 
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        required: true, // [longitude, latitude]
+      },
     },
-    description:{
-        type:String,
-        required:true,
-    },
-    price:{
-        type:Number,
-         required:true,
-    },
-    pages:{
-         type:Number,
-         required:true,
-    },
-    category:{
-        type:String,
-    },
-    condition:{
-        type:String,
-        enum:["New","In-between","Old","Treta-Yug"]
-    },
-    location:{
-       type:{
-        type:String,
-        enum:["Point"],
-        default:"Point"
-       },
-       coordinates:{
-        type:[Number],
-        required:true
-       }
 
+    seller: {
+      uid: { type: String, required: true },
+      name: { type: String },
+      email: { type: String },
     },
-    seller:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:User,
-        required:true,
-    },
-    image:{
-        type:String,
-    }
-},
-{
-    timestamps:true,
-});
+       isSold: { type: Boolean, default: false },
+  },
+  { timestamps: true }
+);
 
-bookSchema.index({location:"2dsphere"});
+bookSchema.index({ location: "2dsphere" }); // For geo queries
 
-module.exports=mongoose.model("Book",bookSchema);
+module.exports = mongoose.model("Book", bookSchema);
