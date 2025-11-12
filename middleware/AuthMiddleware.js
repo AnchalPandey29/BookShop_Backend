@@ -6,7 +6,13 @@ exports.verifyToken = async (req, res, next) => {
 
   try {
     const decoded = await admin.auth().verifyIdToken(token);
-    req.user = decoded;
+
+    // 🔹 Attach both original decoded object and a clean user object
+    req.user = {
+      ...decoded,
+      id: decoded.uid, // ensures req.user.id is available
+    };
+
     next();
   } catch (err) {
     console.error("Auth error:", err);
