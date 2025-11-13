@@ -12,17 +12,13 @@ const bookRouter = require("./router/BookRouter");
 const wishlistRouter = require("./router/WishlistRoutes")
 const paymentRouter = require("./router/PaymentRoute");
 
-console.log("Razorpay Key ID:", process.env.RAZORPAY_KEY_ID);
-console.log("Razorpay Key Secret:", process.env.RAZORPAY_SECRET);
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/books", bookRouter);
-app.use("/api/payments", paymentRouter);
+app.use("/api/payment", paymentRouter);
 app.use("/api/wishlist", wishlistRouter);
 
 
