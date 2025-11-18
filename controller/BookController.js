@@ -4,6 +4,8 @@ const Book = require("../models/BookModel");
 exports.addBook = async (req, res) => {
   try {
     const { title, author, price, description, category, image, location, pages, condition } = req.body;
+    console.log(req.body);
+    
 
     // Extract coordinates safely
     const coordinates = location?.coordinates;

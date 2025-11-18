@@ -7,10 +7,11 @@ exports.verifyToken = async (req, res, next) => {
   try {
     const decoded = await admin.auth().verifyIdToken(token);
 
-    // 🔹 Attach both original decoded object and a clean user object
+    // Ensure both uid and id exist
     req.user = {
       ...decoded,
-      id: decoded.uid, // ensures req.user.id is available
+      uid: decoded.uid,      // Firebase UID
+      id: decoded.uid,       // For modules expecting id
     };
 
     next();
